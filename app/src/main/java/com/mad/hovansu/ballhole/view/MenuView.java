@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.mad.hovansu.ballhole.manager.AssetLoader;
+import com.mad.hovansu.ballhole.manager.DrawBitmap;
 
 public class MenuView extends View {
 
@@ -17,15 +17,15 @@ public class MenuView extends View {
     public MenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
-        menu = Bitmap.createScaledBitmap(AssetLoader.menu, AssetLoader.width, AssetLoader.height, false);
-        play = AssetLoader.play;
+        menu = Bitmap.createScaledBitmap(DrawBitmap.menu, DrawBitmap.width, DrawBitmap.height, false);
+        play = DrawBitmap.play;
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawBitmap(menu, 0, 0, paint);
-        canvas.drawBitmap(play, (AssetLoader.width - play.getWidth()) / 2,
-                (AssetLoader.height - play.getHeight()) / 2, paint);
+        canvas.drawBitmap(play, (DrawBitmap.width - play.getWidth()) / 2,
+                (DrawBitmap.height - play.getHeight()) / 2, paint);
     }
 }

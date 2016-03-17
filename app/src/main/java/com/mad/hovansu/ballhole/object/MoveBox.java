@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.view.MotionEvent;
 
-import com.mad.hovansu.ballhole.manager.AssetLoader;
+import com.mad.hovansu.ballhole.manager.DrawBitmap;
 
 public class MoveBox extends GameObject {
 
@@ -23,7 +23,7 @@ public class MoveBox extends GameObject {
         paint.setColor(Color.RED);
 
         previousX = x;
-        bitmap = Bitmap.createScaledBitmap(AssetLoader.movebox, (int) getWidth(), (int) getHeight(), false);
+        bitmap = Bitmap.createScaledBitmap(DrawBitmap.movebox, (int) getWidth(), (int) getHeight(), false);
     }
 
     public MoveBox(MoveBox moveBox) {
@@ -38,7 +38,7 @@ public class MoveBox extends GameObject {
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
                 deltaX = currentX - previousX;
-                if (getX() + getWidth() + deltaX < AssetLoader.width && getX() + deltaX > 0)
+                if (getX() + getWidth() + deltaX < DrawBitmap.width && getX() + deltaX > 0)
                     setX(getX() + deltaX);
                 break;
         }

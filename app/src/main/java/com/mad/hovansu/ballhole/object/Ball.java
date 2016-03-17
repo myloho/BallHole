@@ -8,7 +8,7 @@ import android.graphics.PointF;
 import android.util.Log;
 import android.view.View;
 
-import com.mad.hovansu.ballhole.manager.AssetLoader;
+import com.mad.hovansu.ballhole.manager.DrawBitmap;
 
 import java.util.Random;
 
@@ -41,7 +41,7 @@ public class Ball extends GameObject{
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.BLUE);
 
-        bitmap = AssetLoader.ball;
+        bitmap = DrawBitmap.ball;
         bitmap = Bitmap.createScaledBitmap(bitmap, (int) (radius * 2), (int) (radius * 2), false);
     }
 
@@ -59,10 +59,10 @@ public class Ball extends GameObject{
     }
 
     public boolean checkCollisionBackground(View view) {
-        if (x + radius + velocityX > AssetLoader.width || x - radius + velocityX < 0) {
+        if (x + radius + velocityX > DrawBitmap.width || x - radius + velocityX < 0) {
             updateAlpha(-alpha);
             return true;
-        } else if (y + radius + velocityY > AssetLoader.height || y - radius + velocityY < 0) {
+        } else if (y + radius + velocityY > DrawBitmap.height || y - radius + velocityY < 0) {
             updateAlpha(Math.PI - alpha);
             return true;
         }
@@ -98,7 +98,7 @@ public class Ball extends GameObject{
         if (blackHole.inArea(p1) || blackHole.inArea(p2)) {
             /*move();
             updateAlpha(Math.PI - alpha);*/
-            int i = rand.nextInt(AssetLoader.width-50)+30;
+            int i = rand.nextInt(DrawBitmap.width-50)+30;
             setX(i);
             int j = rand.nextInt(50) + 50;
             setY(j);
@@ -114,7 +114,7 @@ public class Ball extends GameObject{
         if (blackHole.inArea(p1) || blackHole.inArea(p2)) {
             /*move();
             updateAlpha(-alpha);*/
-            int i = rand.nextInt(AssetLoader.width-50)+30;
+            int i = rand.nextInt(DrawBitmap.width-50)+30;
             setX(i);
             int j = rand.nextInt(50) + 50;
             setY(j);

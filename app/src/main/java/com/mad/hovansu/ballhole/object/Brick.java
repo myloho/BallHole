@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.mad.hovansu.ballhole.manager.AssetLoader;
+import com.mad.hovansu.ballhole.manager.DrawBitmap;
+
+import java.util.ArrayList;
 
 public class Brick extends GameObject {
 
@@ -16,7 +18,7 @@ public class Brick extends GameObject {
         this.width = width;
         this.height = height;
 
-        bitmap = Bitmap.createScaledBitmap(AssetLoader.brick, (int) getWidth(), (int) getHeight(), false);
+        bitmap = Bitmap.createScaledBitmap(DrawBitmap.brick, (int) getWidth(), (int) getHeight(), false);
     }
 
     public void draw(Canvas canvas){

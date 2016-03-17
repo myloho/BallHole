@@ -12,7 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ViewFlipper;
 
-import com.mad.hovansu.ballhole.manager.AssetLoader;
+import com.mad.hovansu.ballhole.manager.DrawBitmap;
 import com.mad.hovansu.ballhole.manager.SoundManager;
 
 public class MainActivity extends Activity {
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
         // Get resources
         resources = getResources();
 
-        AssetLoader.load(getWindowManager().getDefaultDisplay(), getResources());
+        DrawBitmap.load(getWindowManager().getDefaultDisplay(), getResources());
         setContentView(R.layout.activity_main);
 
         soundManager = new SoundManager(this);
@@ -54,10 +54,10 @@ public class MainActivity extends Activity {
                 float y = event.getY();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        if (x >= (display.getWidth() - AssetLoader.play.getWidth()) / 2
-                                && x <= (display.getWidth() + AssetLoader.play.getWidth()) / 2
-                                && y >= (display.getHeight() - AssetLoader.play.getHeight()) / 2
-                                && y <= (display.getHeight() + AssetLoader.play.getHeight()) / 2) {
+                        if (x >= (display.getWidth() - DrawBitmap.play.getWidth()) / 2
+                                && x <= (display.getWidth() + DrawBitmap.play.getWidth()) / 2
+                                && y >= (display.getHeight() - DrawBitmap.play.getHeight()) / 2
+                                && y <= (display.getHeight() + DrawBitmap.play.getHeight()) / 2) {
                             viewFlipper.showNext();
 //                            viewFlipper.setDisplayedChild( viewFlipper.indexOfChild(findViewById(R.id.third)) );
                         }

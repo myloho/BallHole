@@ -8,13 +8,13 @@ import android.view.Display;
 
 import com.mad.hovansu.ballhole.R;
 
-public class AssetLoader {
+public class DrawBitmap {
     public static int width;
     public static int height;
     public static Resources resources;
     public static SoundManager soundManager;
 
-    public static Bitmap bg, menu, play;
+    public static Bitmap background, menu, play;
     public static Bitmap ball, movebox, blackhole;
     public static Bitmap brick;
 
@@ -26,14 +26,14 @@ public class AssetLoader {
         resources = res;
         ball = BitmapFactory.decodeResource(resources, R.drawable.ball);
         movebox = BitmapFactory.decodeResource(resources, R.drawable.bat);
-        bg = BitmapFactory.decodeResource(resources, R.drawable.bg);
+        background = BitmapFactory.decodeResource(resources, R.drawable.background);
         menu = BitmapFactory.decodeResource(resources, R.drawable.menu);
         play = BitmapFactory.decodeResource(resources, R.drawable.play);
         brick = BitmapFactory.decodeResource(resources, R.drawable.brick);
         blackhole = BitmapFactory.decodeResource(resources, R.drawable.blackhole);
 
         //Scale
-        bg = Bitmap.createScaledBitmap(bg, width, height, false);
+        background = Bitmap.createScaledBitmap(background, width, height, false);
         menu = Bitmap.createScaledBitmap(menu, width, height, false);
 
     }

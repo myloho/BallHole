@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.view.View;
 
-import com.mad.hovansu.ballhole.manager.AssetLoader;
+import com.mad.hovansu.ballhole.manager.DrawBitmap;
 
 public class BlackHole extends GameObject {
     private float speedX;
@@ -21,7 +21,7 @@ public class BlackHole extends GameObject {
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.BLUE);
         speedX = 5;
-        bitmap = Bitmap.createScaledBitmap(AssetLoader.blackhole, (int) getWidth(), (int) getHeight(), false);
+        bitmap = Bitmap.createScaledBitmap(DrawBitmap.blackhole, (int) getWidth(), (int) getHeight(), false);
     }
 
     public void move(View view) {
