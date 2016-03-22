@@ -56,8 +56,8 @@ public class MainActivity extends Activity {
                     case MotionEvent.ACTION_DOWN:
                         if (x >= (display.getWidth() - DrawBitmap.play.getWidth()) / 2
                                 && x <= (display.getWidth() + DrawBitmap.play.getWidth()) / 2
-                                && y >= (display.getHeight() - DrawBitmap.play.getHeight()) / 2
-                                && y <= (display.getHeight() + DrawBitmap.play.getHeight()) / 2) {
+                                && y >= (display.getHeight() - DrawBitmap.play.getHeight()) / 2 + 200
+                                && y <= (display.getHeight() + DrawBitmap.play.getHeight()) / 2 + 200) {
                             viewFlipper.showNext();
 //                            viewFlipper.setDisplayedChild( viewFlipper.indexOfChild(findViewById(R.id.third)) );
                         }

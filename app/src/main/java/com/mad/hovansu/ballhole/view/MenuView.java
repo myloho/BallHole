@@ -26,6 +26,6 @@ public class MenuView extends View {
         super.draw(canvas);
         canvas.drawBitmap(menu, 0, 0, paint);
         canvas.drawBitmap(play, (DrawBitmap.width - play.getWidth()) / 2,
-                (DrawBitmap.height - play.getHeight()) / 2, paint);
+                (DrawBitmap.height - play.getHeight()) / 2 + 200, paint);
     }
 }

@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.mad.hovansu.ballhole.manager.DrawBitmap;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Ball extends GameObject{
@@ -17,17 +18,6 @@ public class Ball extends GameObject{
     private float speed;
     // Voi velocityY = velocity * cos(alpha)
     private double alpha;
-
-    public Ball() {
-        x = 0;
-        y = 0;
-        radius = 10;
-        velocityX = 5;
-        velocityY = 10;
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.BLUE);
-    }
 
     public Ball(float x, float y, float radius) {
         this.x = x;
@@ -48,10 +38,6 @@ public class Ball extends GameObject{
     public void move() {
         x = x + velocityX;
         y = y + velocityY;
-    }
-
-    public void draw(Canvas canvas) {
-        canvas.drawCircle(x, y, radius, paint);
     }
 
     public void drawBitmap(Canvas canvas) {
@@ -100,13 +86,9 @@ public class Ball extends GameObject{
             updateAlpha(Math.PI - alpha);*/
             int i = rand.nextInt(DrawBitmap.width-50)+30;
             setX(i);
-            int j = rand.nextInt(50) + 50;
+            int j = rand.nextInt(50) + 70;
             setY(j);
-            if (alpha > 0) {
-                updateAlpha(- alpha);
-            } else {
-                updateAlpha(Math.PI - alpha);
-            }
+            if(velocityY < 0) setVelocityY(-velocityY);
             check = true;
         }
         p1 = new PointF(x + radius + velocityX, y + velocityY);
@@ -118,11 +100,7 @@ public class Ball extends GameObject{
             setX(i);
             int j = rand.nextInt(50) + 50;
             setY(j);
-            if (alpha > 0) {
-                updateAlpha(- alpha);
-            } else {
-                updateAlpha(Math.PI - alpha);
-            }
+            if (velocityY < 0) setVelocityY(-velocityY);
             check = true;
         }
         return check;

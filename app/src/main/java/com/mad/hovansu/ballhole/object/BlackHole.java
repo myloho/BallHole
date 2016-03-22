@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.mad.hovansu.ballhole.manager.DrawBitmap;
 
+import java.util.Random;
+
 public class BlackHole extends GameObject {
     private float speedX;
 
@@ -24,9 +26,26 @@ public class BlackHole extends GameObject {
         bitmap = Bitmap.createScaledBitmap(DrawBitmap.blackhole, (int) getWidth(), (int) getHeight(), false);
     }
 
-    public void move(View view) {
-        x = x + speedX;
-        if (x + speedX > view.getWidth() + 10 || x + speedX < -10) setSpeedX(-getSpeedX());
+    public void move() {
+
+        Random random = new Random();
+        int firstNumber = random.nextInt(1000);
+        if (firstNumber >= 0 && firstNumber < 25){
+            setX(random.nextInt(DrawBitmap.width / 2));
+            setY(random.nextInt((DrawBitmap.height-200)/2)+200);
+        }
+        if (firstNumber >= 25 && firstNumber < 50){
+            setX(random.nextInt((DrawBitmap.width / 2)+DrawBitmap.width/2));
+            setY(random.nextInt((DrawBitmap.height-200)/2)+200);
+        }
+//        if (firstNumber >= 50 && firstNumber < 75){
+//            setX(random.nextInt(DrawBitmap.width / 2));
+//            setY(random.nextInt((DrawBitmap.height-200)/2)+(DrawBitmap.height+200)/2);
+//        }
+//        if (firstNumber >= 75 && firstNumber < 100){
+//            setX(random.nextInt((DrawBitmap.width / 2)+DrawBitmap.width/2));
+//            setY(random.nextInt((DrawBitmap.height-200)/2)+(DrawBitmap.height+200)/2);
+//        }
     }
 
     public boolean inArea(PointF p) {

@@ -32,23 +32,20 @@ public class MainGameView extends SurfaceView {
 
     public MainGameView(Context context, AttributeSet attributes) {
         super(context, attributes);
-        ball = new Ball(DrawBitmap.width / 2, 240, 15);
-        moveBoxTop = new MoveBox(DrawBitmap.width / 2, 200, 150, 20);
-        blackHole = new BlackHole(DrawBitmap.width / 4, 400, 50, 50);
+        ball = new Ball(DrawBitmap.width / 2, 240, 30);
+        moveBoxTop = new MoveBox(DrawBitmap.width / 2, 200, 170, 20);
+        blackHole = new BlackHole(DrawBitmap.width / 4, 400, 100, 100);
         brickList = new ArrayList<>();
         for (int i = 0; i < 11; i++) {
-            for (int j = 0; j <7 ; j++){
+            for (int j = 0; j <5 ; j++){
                 int t = 0;
                 if (j%2==1) t=50;
                 Brick b = new Brick((i * DrawBitmap.width / 10)-t, DrawBitmap.height-50*j, DrawBitmap.width / 10, 50);
                 brickList.add(b);
             }
         }
-
         disableBrickList = new ArrayList<>();
-
         background = DrawBitmap.background;
-
         gameThread = new GameThread(this);
         surfaceHolder = this.getHolder();
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
@@ -86,7 +83,7 @@ public class MainGameView extends SurfaceView {
         moveBoxTop.drawBitmap(canvas);
         blackHole.drawBitmap(canvas);
         ball.move();
-        blackHole.move(this);
+        blackHole.move();
         ball.drawBitmap(canvas);
         for (Brick b : brickList) {
             b.drawBitmap(canvas);
