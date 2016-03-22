@@ -48,8 +48,15 @@ public class Ball extends GameObject{
         if (x + radius + velocityX > DrawBitmap.width || x - radius + velocityX < 0) {
             updateAlpha(-alpha);
             return true;
-        } else if (y + radius + velocityY > DrawBitmap.height || y - radius + velocityY < 0) {
+        } else if (y + radius + velocityY > DrawBitmap.height ) {
             updateAlpha(Math.PI - alpha);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isDead() {
+        if (y - radius + velocityY < 0){
             return true;
         }
         return false;
@@ -84,7 +91,7 @@ public class Ball extends GameObject{
         if (blackHole.inArea(p1) || blackHole.inArea(p2)) {
             /*move();
             updateAlpha(Math.PI - alpha);*/
-            int i = rand.nextInt(DrawBitmap.width-50)+30;
+            int i = rand.nextInt(DrawBitmap.width - 50)+30;
             setX(i);
             int j = rand.nextInt(50) + 70;
             setY(j);
@@ -96,7 +103,7 @@ public class Ball extends GameObject{
         if (blackHole.inArea(p1) || blackHole.inArea(p2)) {
             /*move();
             updateAlpha(-alpha);*/
-            int i = rand.nextInt(DrawBitmap.width-50)+30;
+            int i = rand.nextInt(DrawBitmap.width - 50)+30;
             setX(i);
             int j = rand.nextInt(50) + 50;
             setY(j);
@@ -158,5 +165,6 @@ public class Ball extends GameObject{
     public void setVelocityY(float velocityY) {
         this.velocityY = velocityY;
     }
+
 
 }

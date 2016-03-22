@@ -1,6 +1,7 @@
 package com.mad.hovansu.ballhole.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -9,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.mad.hovansu.ballhole.GameOverActivity;
 import com.mad.hovansu.ballhole.GameThread;
 import com.mad.hovansu.ballhole.MainActivity;
 import com.mad.hovansu.ballhole.manager.DrawBitmap;
@@ -70,6 +72,19 @@ public class MainGameView extends SurfaceView {
                 }
             }
         });
+        if (ball.isDead()){
+            context = getContext();
+            Intent i = new Intent(context, GameOverActivity.class);
+            context.startActivity(i);
+            try {
+                synchronized (context) {
+                    context.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @Override
