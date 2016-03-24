@@ -27,6 +27,7 @@ public class MainGameView extends SurfaceView {
     Ball ball;
     BlackHole blackHole;
     MoveBox moveBoxTop;
+    Brick brick;
     ArrayList<Brick> brickList;
     ArrayList<Brick> disableBrickList;
     Bitmap background;
@@ -72,19 +73,6 @@ public class MainGameView extends SurfaceView {
                 }
             }
         });
-        if (ball.isDead()){
-            context = getContext();
-            Intent i = new Intent(context, GameOverActivity.class);
-            context.startActivity(i);
-            try {
-                synchronized (context) {
-                    context.wait();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 
     @Override
@@ -100,13 +88,13 @@ public class MainGameView extends SurfaceView {
         ball.move();
         blackHole.move();
         ball.drawBitmap(canvas);
-        for (Brick b : brickList) {
-            b.drawBitmap(canvas);
-            if (ball.checkCollision(b)) {
-                disableBrickList.add(b);
+        for (int i = 0; i < brickList.size(); i++){
+            brick = brickList.get(i);
+            brick.drawBitmap(canvas);
+            if (ball.checkCollision(brick, i)) {
+                disableBrickList.add(brick);
             }
         }
-
     }
 
     public void update() {
@@ -121,6 +109,29 @@ public class MainGameView extends SurfaceView {
         }
         if (ball.checkCollision(blackHole)) {
             MainActivity.soundManager.playHit();
+        }
+        if (ball.isDead()){
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Context context = getContext();
+                    Intent i = new Intent(context, GameOverActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    context.startActivity(i);
+                }
+            });
+            t.start();
+            /*Context context = getContext();
+            Intent i = new Intent(context, GameOverActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            context.startActivity(i);*/
+           /* try {
+                synchronized (context) {
+                    context.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
         }
     }
 

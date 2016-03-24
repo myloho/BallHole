@@ -18,12 +18,15 @@ public class Ball extends GameObject{
     private float speed;
     // Voi velocityY = velocity * cos(alpha)
     private double alpha;
+    private int[] fastBallItem = {3, 10, 36, 22, 54};
+    private int[] slowBallItem = {5, 12, 38, 20, 50};
+
 
     public Ball(float x, float y, float radius) {
         this.x = x;
         this.y = y;
         this.radius = radius;
-        speed = 15;
+        speed = 20;
         alpha = Math.PI / 4.0;
         velocityX = (float) (speed * Math.sin(alpha));
         velocityY = (float) (speed * Math.cos(alpha));
@@ -46,10 +49,10 @@ public class Ball extends GameObject{
 
     public boolean checkCollisionBackground(View view) {
         if (x + radius + velocityX > DrawBitmap.width || x - radius + velocityX < 0) {
-            updateAlpha(-alpha);
+            setVelocityX(-velocityX);
             return true;
         } else if (y + radius + velocityY > DrawBitmap.height ) {
-            updateAlpha(Math.PI - alpha);
+            setVelocityY(-velocityY);
             return true;
         }
         return false;
@@ -62,12 +65,19 @@ public class Ball extends GameObject{
         return false;
     }
 
-    public boolean checkCollision(Brick brick) {
+    public boolean checkCollision(Brick brick, int j) {
         boolean check = false;
-
         PointF p1 = new PointF(x + velocityX, y + radius + velocityY);
         PointF p2 = new PointF(x + velocityX, y - radius + velocityY);
         if (brick.inArea(p1) || brick.inArea(p2)) {
+            for (int i = 0; i < 5; i++){
+                if (j == fastBallItem[i]){
+                    setSpeed(speed+10);
+                }
+                if (j == slowBallItem[i] && getSpeed() > 20 ){
+                    setSpeed(speed-10);
+                }
+            }
             move();
             updateAlpha(Math.PI - alpha);
             check = true;
@@ -75,11 +85,20 @@ public class Ball extends GameObject{
         p1 = new PointF(x + radius + velocityX, y + velocityY);
         p2 = new PointF(x - radius + velocityX, y + velocityY);
         if (brick.inArea(p1) || brick.inArea(p2)) {
+            for (int i = 0; i < 5; i++){
+                if (j == fastBallItem[i]){
+                    setSpeed(speed+10);
+                }
+                if (j == slowBallItem[i] && getSpeed() > 20 ){
+                    setSpeed(speed-10);
+                }
+            }
             move();
             updateAlpha(-alpha);
             check = true;
         }
         return check;
+
 
     }
 
@@ -166,5 +185,11 @@ public class Ball extends GameObject{
         this.velocityY = velocityY;
     }
 
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
 
+    public float getSpeed() {
+        return speed;
+    }
 }
