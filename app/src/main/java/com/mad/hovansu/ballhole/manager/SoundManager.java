@@ -19,6 +19,8 @@ public class SoundManager {
     private boolean loaded;
 
     private int soundIdHit;
+    private int soundIdHitBrick;
+    private int soundIdHitHole;
     private float volume;
 
     public SoundManager(Activity main) {
@@ -49,6 +51,8 @@ public class SoundManager {
         });
 
         this.soundIdHit = this.soundPool.load(main, R.raw.hitbat, 1);
+        this.soundIdHitBrick = this.soundPool.load(main, R.raw.brick, 1);
+        this.soundIdHitHole = this.soundPool.load(main, R.raw.hole, 1);
 
     }
 
@@ -57,6 +61,20 @@ public class SoundManager {
             float leftVolumn = volume;
             float rightVolumn = volume;
             int streamId = this.soundPool.play(this.soundIdHit, leftVolumn, rightVolumn, 0, 0, 1f);
+        }
+    }
+    public void playHitBrick() {
+        if (loaded) {
+            float leftVolumn = volume;
+            float rightVolumn = volume;
+            int streamId = this.soundPool.play(this.soundIdHitBrick, leftVolumn, rightVolumn, 0, 0, 1f);
+        }
+    }
+    public void playHitHole() {
+        if (loaded) {
+            float leftVolumn = volume;
+            float rightVolumn = volume;
+            int streamId = this.soundPool.play(this.soundIdHitHole, leftVolumn, rightVolumn, 0, 0, 1f);
         }
     }
 }

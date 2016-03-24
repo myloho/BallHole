@@ -13,6 +13,7 @@ import android.view.SurfaceView;
 import com.mad.hovansu.ballhole.GameOverActivity;
 import com.mad.hovansu.ballhole.GameThread;
 import com.mad.hovansu.ballhole.MainActivity;
+import com.mad.hovansu.ballhole.WinActivity;
 import com.mad.hovansu.ballhole.manager.DrawBitmap;
 import com.mad.hovansu.ballhole.object.Ball;
 import com.mad.hovansu.ballhole.object.BlackHole;
@@ -39,8 +40,8 @@ public class MainGameView extends SurfaceView {
         moveBoxTop = new MoveBox(DrawBitmap.width / 2, 200, 170, 20);
         blackHole = new BlackHole(DrawBitmap.width / 4, 400, 100, 100);
         brickList = new ArrayList<>();
-        for (int i = 0; i < 11; i++) {
-            for (int j = 0; j <5 ; j++){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 1; j < 5 ; j++){
                 int t = 0;
                 if (j%2==1) t=50;
                 Brick b = new Brick((i * DrawBitmap.width / 10)-t, DrawBitmap.height-50*j, DrawBitmap.width / 10, 50);
@@ -92,6 +93,7 @@ public class MainGameView extends SurfaceView {
             brick = brickList.get(i);
             brick.drawBitmap(canvas);
             if (ball.checkCollision(brick, i)) {
+                MainActivity.soundManager.playHitBrick();
                 disableBrickList.add(brick);
             }
         }
@@ -108,7 +110,7 @@ public class MainGameView extends SurfaceView {
             }
         }
         if (ball.checkCollision(blackHole)) {
-            MainActivity.soundManager.playHit();
+            MainActivity.soundManager.playHitHole();
         }
         if (ball.isDead()){
             Thread t = new Thread(new Runnable() {
@@ -121,17 +123,18 @@ public class MainGameView extends SurfaceView {
                 }
             });
             t.start();
-            /*Context context = getContext();
-            Intent i = new Intent(context, GameOverActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            context.startActivity(i);*/
-           /* try {
-                synchronized (context) {
-                    context.wait();
+        }
+        if (brickList.size()==0){
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Context context = getContext();
+                    Intent i = new Intent(context, WinActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    context.startActivity(i);
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
+            });
+            t.start();
         }
     }
 

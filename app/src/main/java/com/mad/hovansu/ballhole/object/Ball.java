@@ -71,7 +71,7 @@ public class Ball extends GameObject{
         PointF p2 = new PointF(x + velocityX, y - radius + velocityY);
         if (brick.inArea(p1) || brick.inArea(p2)) {
             for (int i = 0; i < 5; i++){
-                if (j == fastBallItem[i]){
+                if (j == fastBallItem[i] && getSpeed() < 30){
                     setSpeed(speed+10);
                 }
                 if (j == slowBallItem[i] && getSpeed() > 20 ){
@@ -86,7 +86,7 @@ public class Ball extends GameObject{
         p2 = new PointF(x - radius + velocityX, y + velocityY);
         if (brick.inArea(p1) || brick.inArea(p2)) {
             for (int i = 0; i < 5; i++){
-                if (j == fastBallItem[i]){
+                if (j == fastBallItem[i] && getSpeed() < 30){
                     setSpeed(speed+10);
                 }
                 if (j == slowBallItem[i] && getSpeed() > 20 ){

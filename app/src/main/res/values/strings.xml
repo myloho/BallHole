@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BallHole</string>
     <string name="title_activity_game_over">GameOverActivity</string>
+    <string name="title_activity_win">WinActivity</string>
 </resources>
